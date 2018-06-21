@@ -1,0 +1,24 @@
+/* XPM */
+static char * ciseau [] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 2 1 22 10",
+/* colors */
+" 	s iconGray2	m white	c #c8c8c8c8c8c8",
+".	s iconGray7	m black	c #4b4b4b4b4b4b",
+/* pixels */
+"         .      ",
+"     .   .      ",
+"     .   .      ",
+"     .   .      ",
+"     .. ..      ",
+"      . .       ",
+"      ...       ",
+"       .        ",
+"       .        ",
+"      ...       ",
+"      . ...     ",
+"    ... .  .    ",
+"   .  . .  .    ",
+"   .  . .  .    ",
+"   .  .  ..     ",
+"    ..          "};

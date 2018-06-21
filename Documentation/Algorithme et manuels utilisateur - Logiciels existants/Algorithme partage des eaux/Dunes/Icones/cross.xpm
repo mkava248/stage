@@ -1,0 +1,19 @@
+/* XPM */
+static char * stats [] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"11 11 2 1 0 0",
+/* colors */
+" 	s iconColor5	m black	c black",
+".	s iconColor2	m white	c white",
+/* pixels */
+"...........",
+".         .",
+".    .    .",
+".    .    .",
+".    .    .",
+". ....... .",
+".    .    .",
+".    .    .",
+".    .    .",
+".         .",
+"..........." };

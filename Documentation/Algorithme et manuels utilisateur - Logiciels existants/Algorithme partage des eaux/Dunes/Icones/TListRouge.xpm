@@ -1,0 +1,28 @@
+/* XPM */
+static char * TListRouge [] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 6 1 0 0",
+/* colors */
+" 	s none	m none	c none",
+".	c #838383838383",
+"X	s iconColor1	m black	c black",
+"o	s iconColor3	m black	c red",
+"O	c #C5C5C5C5C5C5",
+"+	s iconGray2	m white	c #c8c8c8c8c8c8",
+/* pixels */
+" ........X      ",
+" .ooooooO.X     ",
+" .ooooooooo.X   ",
+" .oXXXXXXXoo.X  ",
+" .oXXoooXXoooXX ",
+" .oXoooooXoooO.X",
+" .oXXoooXXoooO.X",
+" .oXXXXXXooooO.X",
+" .oXXoooooooo+.X",
+" .oXXooooooooO.X",
+" .oXXooooooooO.X",
+" .oXXooooooooO.X",
+" .oooooooooooO.X",
+" .OOOOO+OOOOOO.X",
+" ..............X",
+"XXXXXXXXXXXXXXXX"};

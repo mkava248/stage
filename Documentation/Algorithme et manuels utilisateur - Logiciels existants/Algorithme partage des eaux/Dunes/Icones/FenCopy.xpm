@@ -1,0 +1,31 @@
+/* XPM */
+static char * FenCopy [] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 9 1 0 0",
+/* colors */
+" 	s none	m none	c none",
+".	s iconGray5	m black	c #7d7d7d7d7d7d",
+"X	s iconGray8	m black	c #323232323232",
+"o	s iconGray1	m white	c #e1e1e1e1e1e1",
+"O	s iconColor3	m black	c red",
+"+	s iconGray6	m black	c #646464646464",
+"@	s iconColor1	m black	c black",
+"#	s foreground	m white	c white",
+"$	s iconGray3	m white	c #afafafafafaf",
+/* pixels */
+"                ",
+"                ",
+"     ..XXXX..   ",
+"    .. oooo ..  ",
+" OO .+o@@@@o+.  ",
+" OO .o@@@#@@o.  ",
+"++++o@@@@@#@@o++",
+"++++o@@@@@@#@o++",
+"+$+$o@@@@@@#@o$+",
+"+$+$o@@@@@#X@o$+",
+"+$+$$o@@@#@@o$$+",
+"+$+$$oo@@@@o$XX+",
+"+$+$$$$oooo$$XX+",
+"+$+$$$$$$$$$$$$+",
+"XXXXXXXXXXXXXXXX",
+" XXXXXXXXXXXXXX "};

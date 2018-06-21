@@ -1,0 +1,29 @@
+/* XPM */
+static char *ilvdoc[] = {
+/* width height num_colors chars_per_pixel */
+"    16    16        6            1",
+/* colors */
+". c #000000",
+"# c #848484",
+"a c none",
+"b c #c6c6c6",
+"c c #f00000",
+"d c #ffffff",
+/* pixels */
+"a########.aaaaaa",
+"a#ccccccb#.aaaaa",
+"a#ccccccbdb#.aaa",
+"a#ccccccbddb#.aa",
+"a#ccccccb......a",
+"a#cccccccccccb#.",
+"a#cc.ccc...ccb#.",
+"a#c.c.cc.cc.cb#.",
+"a#ccc.cc.cc.cb#.",
+"a#cc.ccc.cc.cb#.",
+"a#c.cccc.cc.cb#.",
+"a#c...cc...ccb#.",
+"a#cccccccccccb#.",
+"a#bbbbbbbbbbbb#.",
+"a##############.",
+"................"
+};

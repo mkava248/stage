@@ -1,0 +1,28 @@
+/* XPM */
+static char * TFScale [] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 6 1 0 0",
+/* colors */
+" 	s iconColor6	m white	c yellow",
+".	s iconColor1	m black	c black",
+"X	s iconColor2	m white	c white",
+"o	s iconColor8	m black	c magenta",
+"O	s iconColor3	m black	c red",
+"+	s iconColor5	m black	c blue",
+/* pixels */
+"            ....",
+"   X           .",
+"  X.X          .",
+" X...X         .",
+"X.....Xoooooo...",
+"XXX.XXXoooooooo.",
+"ooX.Xoooooooooo.",
+"ooX.Xooooooo....",
+"OOX.XOOOOOOOOOO.",
+"OOX.XOOOOOOOOOO.",
+"OOX.XOOOOOOOO...",
+"OOX.XOOOOOOOOOO.",
+"++X.X++++++++++.",
+"++X.X++++++++++.",
+"++X.X+++++++....",
+"++XXX++++++++++."};
