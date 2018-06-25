@@ -1,64 +1,60 @@
-from ListPixel import ListPixel
-from Pixel import Pixel
-from MorphologiquesOperations import MorphologiquesOperations
-from Image import Image
-import matplotlib.image as mpimg
+from Algorithme import ListPixel as lp
+from Algorithme import Pixel as pi
+from Algorithme import Image as mge
 
+#Classe d'algorithme
 class LPE():
-	def __init__(self):
+	#Initialise les données pour la l'algorithme
+	def __init__(self, image):
 		self.INIT = -1
 		self.MASK = -2
 		self.WSHED = 0
 		self.MARK = -1
 
-		self.histogramme = [0]*256
-		self.image = Image()
-		self.sortedImage = Image()
-		self.sortedPixels = ListPixel()
-
-		self.pFictif = Pixel(-1, -1, -1)
-
-
-
-	def init(self, image):
+		self.image = mge.Image()
 		self.image.init1(image)
-		self.histo()
-		print("histo")
-		self.sortImage()
-		print("sort")
+		self.sortedImage = mge.Image()
 
-	def histo(self):
-		for level in range(256):
-			self.histogramme[level] = self.image.getNumberPixelsAtLevel(level)
-
-	def sortImage(self):
+		self.sortedPixels = lp.ListPixel()
 		self.sortedPixels.addPixels(self.image.getImage())
 
+		self.pFictif = pi.Pixel(-1, -1, -1)		
 
+	#Pour savoir si le pixel a des voisins
+	#@param h (hauteur de l'image) : int
+	#@param w (largeur de l'image) : int
+	#@param row (ligne du pixel) : int
+	#@param column (colonne du pixel) : int
+	#@param varRow (ligne du voisin) : int
+	#@param varCol (colonne du voisin) : int
+	#@return boolean
 	def isNeighbour(self, h, w, row, column, varRow, varCol):
 		if((row+varRow>=0) and (row+varRow < h) and (column+varCol>=0) and (column+varCol < w)):
 			return ((varRow == 0 and varCol != 0) or (varRow != 0 and varCol == 0))
 		return False
 
+	#Méthode faisant l'algorithme de Vincent&Soille
 	def runLPE(self):
-		lab = Image()
-		lab.init3(self.image.getHeight(), self.image.getWidth(), -1)
-		dist = Image()
-		dist.init2(self.image.getHeight(), self.image.getWidth())
+		lab = mge.Image() #Image dans lequel on précise la valeur du label de chaque pixel
+		lab.init3(self.image.getHeight(), self.image.getWidth(), -1) #On initialise cette image à -1
+		dist = mge.Image() #Image de distance 
+		dist.init2(self.image.getHeight(), self.image.getWidth()) #Initialisé à 0
 
-		curlab = 0
+		curlab = 0 #Valeur du label actuel
 
-		pile = []
+		pile = [] #Pile dans laquelle on va ajouté les pixels à traiter
 
+		#Boucle pour chaque niveaux de gris
 		for h in range(256):
 			print(h)
 
-			pixels = self.sortedPixels.getPixelsByLevel(h)
+			pixels = self.sortedPixels.getPixelsByLevel(h) #Obtenir tous les pixels qui ont la valeur qui sont au niveau de gris
 			for curPix in pixels:
 				lab.write1(curPix.getX(), curPix.getY(), -2)
 				row = curPix.getX()
 				column = curPix.getY()
 
+				#On regarde si les voisins sont 
 				done = True
 				for varRow in range(-1, 2, 1):
 					if(done):
@@ -94,13 +90,11 @@ class LPE():
 										lab.write1(curPix.getX(), curPix.getY(), lab.read2(neighbourPos))
 									elif (lab.read1(curPix.getX(), curPix.getY()) != lab.read2(neighbourPos)):
 										lab.write1(curPix.getX(), curPix.getY(), self.WSHED)
-										#lab.write2(neighbourPos, curlab)
 								elif(lab.read1(curPix.getX(), curPix.getY()) == -2):
 									lab.write1(curPix.getX(), curPix.getY(), self.WSHED)
-									#lab.write2(neighbourPos, curlab)
 							elif(lab.read2(neighbourPos) == -2 and dist.read2(neighbourPos) == 0):
 								dist.write2(neighbourPos, curDist+1)
-								pile.append(Pixel(self.image.getRowFromAbsolutePosition(neighbourPos),
+								pile.append(pi.Pixel(self.image.getRowFromAbsolutePosition(neighbourPos),
 								 self.image.getColumnFromAbsolutePosition(neighbourPos), 0))
 
 			for curPix in pixels:
@@ -118,7 +112,7 @@ class LPE():
 								if(self.isNeighbour(lab.getHeight(), lab.getWidth(), row2, column2, varRow, varCol)):
 									neighbourPos = lab.getAbsolutePosition(row2+varRow, column2+varCol)
 									if(lab.read2(neighbourPos) == -2):
-										pile.append(Pixel(self.image.getRowFromAbsolutePosition(neighbourPos),
+										pile.append(pi.Pixel(self.image.getRowFromAbsolutePosition(neighbourPos),
 											self.image.getColumnFromAbsolutePosition(neighbourPos), 0))
 										lab.write2(neighbourPos, curlab)
 

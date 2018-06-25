@@ -1,7 +1,8 @@
 from tkinter import filedialog
 import matplotlib.image as mpimg
 import cv2
-from VincentSoille import VincentSoille
+from Algorithme import Algorithme as al
+from Suppression import Suppression as sp
 from PIL import Image
 import numpy as np
 
@@ -9,20 +10,22 @@ path = filedialog.askopenfilename(title="Ouvrir une image",filetypes=[('all file
 img = Image.open(path).convert('L')
 #img = cv2.imread(path, 0)
 
-vs = VincentSoille(img)
-vs.init(8)
+suppression = sp.sup(img)
+img = suppression.supHautBas(20, 20)
+
+algo = al.RunLPE(img, 0)
 print("Init done")
-vs.process()
+algo.process()
 print("Flooding done")
-lab = vs.getLab()
-bordure = vs.getReturn()
-image = vs.getSepOnImage()
+lab = algo.getLab()
+bord = algo.getBordure()
+img= algo.getSepOnImage()
 print("Done")
 
-a = np.array(lab)
-ar = np.array(bordure)
-i = np.array(image)
+label = np.array(lab)
+bordure = np.array(bord)
+image = np.array(img)
 print("Process")
-mpimg.imsave("vincentetsoille.png", a)
-mpimg.imsave("vincentetsoilleBordure.png", ar, cmap = 'gray')
-mpimg.imsave("bordureSurImage.png", i, cmap = 'gray')
+mpimg.imsave("label.png", label)
+mpimg.imsave("bordures.png", bordure, cmap = 'gray')
+mpimg.imsave("bordureSurImage.png", image, cmap = 'gray')

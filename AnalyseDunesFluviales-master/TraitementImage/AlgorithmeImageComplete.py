@@ -9,3 +9,5 @@ def FiltrageLaplacien(Image = None):
     #plt.imshow(img,cmap = 'gray')
     #plt.show()
     pass
+
+def FiltrageLPE

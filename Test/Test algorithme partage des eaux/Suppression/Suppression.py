@@ -3,11 +3,21 @@ from PIL import Image
 import matplotlib.image as mpimg
 from tkinter import filedialog
 
+#Classe pour faire la suppression des berges
 class sup():
+	#Initialisation
+	#@param image : image (liste de liste)
 	def __init__(self, image):
 		self.largeur, self.hauteur = image.size
 		self.image = np.asmatrix(image).tolist()
 
+	#Pour faire la suppression des berges par tous les côtés
+	#Nombre de pixels à retirer par bords
+	#@param haut : int
+	#@param bas : int
+	#@param gauche : int
+	#@param droite : int
+	#@return image : image (liste de liste)
 	def sup(self, haut, bas, gauche, droite):
 		img = np.array(self.image)
 		i = img == 255
@@ -68,11 +78,24 @@ class sup():
 		i = np.logical_not(i)
 		img = i * img
 		img = img + berge
-		mpimg.imsave("valeur 0.jpg", img, cmap ='gray')
+		return img.tolist()
 
+	#Supprime le même nombre de pixel sur chaque côté
+	#@param value : int
+	#@return image : image (liste de liste)
+	def supEgale(self, value):
+		return self.sup(value, value, value, value)
 
-path = filedialog.askopenfilename(title="Ouvrir une image",filetypes=[('all files','.*')]) 
-img = Image.open(path).convert('L')
+	#Supprime les pixels à partir du haut et du bas de l'image
+	#@param haut : int
+	#@param bas : int
+	#@return image : image (liste de liste)
+	def supHautBas(self, haut, bas):
+		return self.sup(haut, bas, 0, 0)
 
-s = sup(img)
-s.sup(10, 10, 10, 10)
+	#Supprimee les pixels à partir de gauche et de droite
+	#@param gauche : int
+	#@param droite : int
+	#@return image : image (liste de liste)
+	def supGaucheDroite(self, gauche, droite):
+		return self.sup(0, 0, gauche, droite)
