@@ -24,8 +24,3 @@ class Pixel():
 	#@return level : int
 	def getLevel(self):
 		return self.level
-
-	def __eq__(self, objet):
-		if(objet.getX() == self.getX() and objet.getY() == self.getY() and objet.getLevel() == self.getLevel()):
-			return True
-		return False

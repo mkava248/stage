@@ -3,6 +3,8 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk
 from Interfaces import ResultatsAxes
 from Interfaces import ResultatsImage
+from Interfaces import CalculLPE
+from Interfaces import ImageCoupure
 from TraitementImage import ImageDune
 from TraitementImage import GestionAxes
 
@@ -79,6 +81,9 @@ class MenuPrincipal(Frame):
         self.BoutonTraitementAxes.pack(side=TOP)
         self.BoutonTraitementImage = Button(FrameMenu, text="Traitement image", state=DISABLED, command = lambda : self.TraitementImage())
         self.BoutonTraitementImage.pack(side=TOP)
+
+        self.BoutonCoupure = Button(FrameMenu, text="Coupure Image", state=DISABLED, command = lambda : self.CoupureImage())
+        self.BoutonCoupure.pack(side=TOP)
         
         FrameImage = Frame(self)
         FrameImage.pack(side=RIGHT, fill = BOTH, expand = 1)
@@ -115,6 +120,7 @@ class MenuPrincipal(Frame):
                 self.AffichageImage()
                 # On rend possible le bouton pour le traitement sur l'image
                 self.BoutonTraitementImage['state'] = 'normal'
+                self.BoutonCoupure['state'] = 'normal'
             else:
                 messagebox.showerror("Erreur", """L'image ouverte en paramètre ne respecte pas la convention de nommage pour utiliser le programme.
 Les niveaux d'altitude minimum et maximum (m) doivent être indiqués dans le nom de l'image séparé par le caractère '_'.        
@@ -191,6 +197,7 @@ Voulez-vous poursuivre ?""")
             # On récupère la position du point que l'on va placer sur le canevas
             PositionXPoint = event.x
             PositionYPoint = event.y
+            print(PositionXPoint, PositionYPoint)
             #print("X = " + str(PositionXPoint) + " Y = " + str(PositionYPoint))
             
             # on ajoute le point dans la liste des axe (GestionAxes)
@@ -318,5 +325,11 @@ puis cliquer sur ce même bouton""")
 
     def TraitementImage(self):
         fenTraitementImage = Toplevel()
-        fenTraitementImage.title("Résultats image complète - Analyse dunes 2018")
-        ResultatsImage.ResultatsImage(fenTraitementImage, self.MonImage, self.MiniatureImage, self.SeuilDetectionPetiteDune.get())
+        fenTraitementImage.title("Demande des données - Analyse dunes 2018")
+        CalculLPE.CalculLPE(fenTraitementImage, self.MonImage, self.MiniatureImage, self.SeuilDetectionPetiteDune.get(), False)
+
+    def CoupureImage(self):
+        fenTraitementImage = Toplevel()
+        fenTraitementImage.title("Coupure Image - Analyse dunes 2018")
+        ImageCoupure.ImageCoupure(fenTraitementImage, self.MonImage, self.MiniatureImage, self.SeuilDetectionPetiteDune.get())
+

@@ -1,4 +1,4 @@
-import Pixel as pi
+from Algorithme import Pixel as pi
 
 class ListPixel():
 	#Initialise les pixels

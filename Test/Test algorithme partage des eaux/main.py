@@ -11,9 +11,9 @@ img = Image.open(path).convert('L')
 #img = cv2.imread(path, 0)
 
 suppression = sp.sup(img)
-img = suppression.supHautBas(20, 20)
+img = suppression.supHautBas(0, 0)
 
-algo = al.RunLPE(img, 0)
+algo = al.RunLPE(img, 10)
 print("Init done")
 algo.process()
 print("Flooding done")

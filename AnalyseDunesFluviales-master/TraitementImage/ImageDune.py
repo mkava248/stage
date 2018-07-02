@@ -30,6 +30,12 @@ class ImageDune():
             ImageValide = True        
         
         return ImageValide
+
+    def setImage(self, image):
+        self.Image = image
+
+    def setResolution(self, resolution):
+        self.ResolutionAltitude = resolution
             
     def getCheminImage(self):
         return self.CheminImage
