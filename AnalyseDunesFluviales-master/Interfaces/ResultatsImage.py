@@ -6,10 +6,13 @@ from numpy import asmatrix
 import numpy as np
 from TraitementImage import ImageDune, AlgorithmeImageComplete, ExportTXT
 from Algorithme import Hauteur
+import time
 class ResultatsImage(Frame):  
 
     def __init__(self, fenetre, origine = None, MonImage = None, separation = None, ImageAffiche = [0], SeuilDetectionDune = 0):
         
+
+        self.temps = time.clock()
         self.MonImage = MonImage
         self.ImageAffichage = ImageAffiche
         self.DetectionDune = SeuilDetectionDune
@@ -65,6 +68,10 @@ class ResultatsImage(Frame):
 
         #AlgorithmeImageComplete.FiltrageLaplacien(MonImage)
 
+        #image = np.array(self.separation)
+        #image = Image.fromarray(image)
+        #image.show()
+
     def ExportTxt(self):
         ExportTXT.ExportResultatsDunes(self.TableauAnalyseImage, self.MonImage, self.BilanDunesImage)
     
@@ -80,4 +87,9 @@ class ResultatsImage(Frame):
             hauteur = Hauteur.Hauteur(self.separation, self.origine.getImage())
             resolution = self.origine.getResolutionAltitude()
             ht  = hauteur.calcul(PositionY, PositionX, resolution)
-            messagebox.showinfo("Hauteur", str(ht) + " cm.")
+            if(ht == None):
+                messagebox.showinfo("Hauteur","Limite sélectionnée")
+            else:
+                messagebox.showinfo("Hauteur", str(ht) + " m.")
+        print("temps ", time.clock() - self.temps)
+        #self.RemplirTableauResultats()

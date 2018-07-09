@@ -197,7 +197,6 @@ Voulez-vous poursuivre ?""")
             # On récupère la position du point que l'on va placer sur le canevas
             PositionXPoint = event.x
             PositionYPoint = event.y
-            print(PositionXPoint, PositionYPoint)
             #print("X = " + str(PositionXPoint) + " Y = " + str(PositionYPoint))
             
             # on ajoute le point dans la liste des axe (GestionAxes)

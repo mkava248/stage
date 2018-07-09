@@ -1,4 +1,4 @@
-import Pixel as pi
+from Algorithme import Pixel as pi
 
 class ListPixel():
 	#Initialise les pixels
@@ -62,11 +62,15 @@ class ListPixel():
 	def getNumberPixels(self):
 		return self.number
 
+	#Permet de savoir si un pixel est dans la liste
+	#@param pixel : pixel
 	def isIn(self, pixel):
 		if(pixel in self.listPixel[pixel.getLevel()]):
 			return True
 		return False
 
+	#Permet de surcharger l'opérateur "in"
+	#@param objet : pixel 
 	def __contains__(self, objet):
 		for pixel in self.listPixel[objet.getLevel()]:
 			if(pixel == objet):

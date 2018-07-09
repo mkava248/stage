@@ -13,7 +13,7 @@ img = Image.open(path).convert('L')
 suppression = sp.sup(img)
 img = suppression.supHautBas(0, 0)
 
-algo = al.RunLPE(img, 10)
+algo = al.RunLPE(img, 0)
 print("Init done")
 algo.process()
 print("Flooding done")

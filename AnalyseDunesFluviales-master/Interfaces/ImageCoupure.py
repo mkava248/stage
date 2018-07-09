@@ -5,12 +5,18 @@ import numpy as np
 from TraitementImage import Coupure, Point, GestionAxes, ImageDune
 from Interfaces import CalculLPE
 
+#Classe pour afficher la fenêtre où la coupure se fait
 class ImageCoupure(Frame):
-	def __init__(self, fenetre, MonImage, ImageAffiche, seuilDetection):
-		self.monImage = MonImage.getImage()
-		self.resolution = MonImage.getResolutionAltitude()
+	#Initialiser la fenetre
+	#@param fenetre : fenetre
+	#@param monImage : image
+	#@param imageAffiche : image
+	#@param seuilDetection : int
+	def __init__(self, fenetre, monImage, imageAffiche, seuilDetection):
+		self.monImage = monImage.getImage()
+		self.resolution = monImage.getResolutionAltitude()
 		self.monImageListe = np.asmatrix(self.monImage).tolist()
-		self.miniature = ImageAffiche
+		self.miniature = imageAffiche
 		self.seuilDetection = seuilDetection
 
 		img = np.array(self.monImage)
@@ -39,6 +45,7 @@ class ImageCoupure(Frame):
 
 		Button(FrameMenu, text='Reset', command = lambda : self.reset()).pack(side=TOP)
 
+	#Place un point à l'endroit on l'on appuie. Si quatre points sont placés lance la calcul de la LPE
 	def Calcul(self, event):
 		PositionX = event.x
 		PositionY = event.y

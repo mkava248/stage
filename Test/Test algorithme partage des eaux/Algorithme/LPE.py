@@ -45,16 +45,18 @@ class LPE():
 		pile = [] #Pile dans laquelle on va ajouté les pixels à traiter
 
 		#Boucle pour chaque niveaux de gris
-		for h in range(256):
+		#for h in range(256):
+		for h in range(255, 0, -1):
 			print(h)
 
+			#Sélectionne tous les pixels qui font partie du niveau de gris
 			pixels = self.sortedPixels.getPixelsByLevel(h) #Obtenir tous les pixels qui ont la valeur qui sont au niveau de gris
 			for curPix in pixels:
 				lab.write1(curPix.getX(), curPix.getY(), -2)
 				row = curPix.getX()
 				column = curPix.getY()
 
-				#On regarde si les voisins sont 
+				#On regarde si les voisins sont corrects
 				done = True
 				for varRow in range(-1, 2, 1):
 					if(done):
@@ -122,15 +124,17 @@ class LPE():
 				if(lab.read2(curPix)>0):
 					row = lab.getRowFromAbsolutePosition(curPix)
 					column = lab.getColumnFromAbsolutePosition(curPix)
-
-					done = True
-					for varRow in range(-1, 2, 1):
-						if(done):
-							for varCol in range(-1, 2, 1):
-								if (done):
-									if(self.isNeighbour(lab.getHeight(), lab.getWidth(), row, column, varRow, varCol)):
-										neighbourPos = lab.getAbsolutePosition(row+varRow, column+varCol)
-										if(lab.read2(curPix) > lab.read2(neighbourPos) and lab.read2(neighbourPos)>0):
-											lab.write2(curPix, 0)
-											done = False
+					
+					while(True):
+						for i in range(9):
+							varRow = round(i/3-1)
+							varCol = round(i%3-1)
+							if(varRow>1):
+								varRow = -1
+							if(self.isNeighbour(lab.getHeight(), lab.getWidth(), row, column, varRow, varCol)):
+								neighbourPos = lab.getAbsolutePosition(row+varRow, column+varCol)
+								if(lab.read2(curPix) > lab.read2(neighbourPos) and lab.read2(neighbourPos)>0):
+									lab.write2(curPix, 0)
+									break
+						break
 		return lab

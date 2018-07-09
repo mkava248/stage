@@ -1,3 +1,4 @@
+#Classe pour connaitre les coordonnées du rectangle de la nouvelle image
 class coupure():
 	def __init__(self):
 		self.x = -1
@@ -5,12 +6,19 @@ class coupure():
 		self.bX = False
 		self.bY = False
 
+	#Initialise la classe avec les coordonnées du premiers coins du rectangle
+	#@param x : int
+	#@param y : int 
 	def setValues(self, x, y):
 		self.x = x
 		self.y = y
 		self.bX = True
 		self.bY = True
 		
+	#Pour voir qu'elles sont les bonnes coordonnées du point
+	#@param x : int
+	#@param y : int
+	#@return x, y
 	def coordonnees(self, x, y):
 		if(self.bX == False and self.bY == False):
 			self.setValues(x, y)
