@@ -1,5 +1,5 @@
-import numpy as np
 from Algorithme import ListPixel as lp
+import numpy as np
 
 #Classe de l'image
 class Image():
@@ -14,11 +14,11 @@ class Image():
 	#Initialisation avec l'image
 	#@param image : image (liste de liste) 
 	def init1(self, image):
-		self.image = image
+		self.image = image[:]
 		self.hauteur = len(image)
 		self.largeur = len(image[0])
 		self.surface = self.largeur * self.hauteur
-		self.listPixel.addPixels(self.image)
+		self.listPixel.addPixels(image)
 
 	#Initialisation par la hauteur et la largeur
 	#L'image est initialisée à 0, remplie de noir

@@ -327,6 +327,7 @@ puis cliquer sur ce même bouton""")
         fenTraitementImage.title("Demande des données - Analyse dunes 2018")
         CalculLPE.CalculLPE(fenTraitementImage, self.MonImage, self.MiniatureImage, self.SeuilDetectionPetiteDune.get(), False)
 
+    #Affiche la fenetre pour faire la coupure de l'image
     def CoupureImage(self):
         fenTraitementImage = Toplevel()
         fenTraitementImage.title("Coupure Image - Analyse dunes 2018")

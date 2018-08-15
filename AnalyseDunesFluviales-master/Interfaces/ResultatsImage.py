@@ -1,12 +1,21 @@
-﻿from tkinter import *
-from tkinter import ttk, messagebox
+﻿from TraitementImage import ImageDune, AlgorithmeImageComplete, ExportTXT
+from Algorithme import Hauteur
+from Algorithme import Transec as tr
+from Algorithme import Image as mge
+from Algorithme import Pixel as pi
+from tkinter import *
+from tkinter import ttk
 from PIL import ImageTk, Image
 from scipy import array, shape
-from numpy import asmatrix
 import numpy as np
-from TraitementImage import ImageDune, AlgorithmeImageComplete, ExportTXT
-from Algorithme import Hauteur
+
 import time
+import copy
+
+from Algorithme import Pixel as pi
+
+import matplotlib.pyplot as plt
+#Classe pour afficher l'image résultat après la lpe
 class ResultatsImage(Frame):  
 
     def __init__(self, fenetre, origine = None, MonImage = None, separation = None, ImageAffiche = [0], SeuilDetectionDune = 0):
@@ -66,11 +75,6 @@ class ResultatsImage(Frame):
         self.BilanDunesImage = [0,0,0]
         
 
-        #AlgorithmeImageComplete.FiltrageLaplacien(MonImage)
-
-        #image = np.array(self.separation)
-        #image = Image.fromarray(image)
-        #image.show()
 
     def ExportTxt(self):
         ExportTXT.ExportResultatsDunes(self.TableauAnalyseImage, self.MonImage, self.BilanDunesImage)
@@ -80,16 +84,38 @@ class ResultatsImage(Frame):
         for i in range (0, NombreDunes):
             self.Table.insert('', 'end', str(i), text='Axe ' + str(i), values = (str(ResultatsDunes[i][0]), str(ResultatsDunes[i][1]), str(ResultatsDunes[i][2])))
 
+    #Méthode se lançant au moment où l'on appuie 
+    #Calcul la hauteur de l'image
     def Hauteur(self, event):
         PositionX = event.x
         PositionY = event.y
         if(PositionX <  self.image.size[0] and PositionY < self.image.size[1]):
-            hauteur = Hauteur.Hauteur(self.separation, self.origine.getImage())
+            hauteur = Hauteur.Hauteur(self.separation, self.origine.getImage(), self.MonImage)
             resolution = self.origine.getResolutionAltitude()
-            ht  = hauteur.calcul(PositionY, PositionX, resolution)
-            if(ht == None):
-                messagebox.showinfo("Hauteur","Limite sélectionnée")
-            else:
-                messagebox.showinfo("Hauteur", str(ht) + " m.")
+            hauteur.calculAll(resolution)
+
+            im = mge.Image()
+            im.init1(copy.deepcopy(self.MonImage))
+            self.EraseFile("Graphique")
+            for x in range(0, self.image.size[0],1):
+                pixStart = pi.Pixel(x, 0, 0)
+                pixEnd = pi.Pixel(x, self.image.size[1]-1, 0)
+                transec = tr.Transec(pixStart, pixEnd, im)
+                ligne = transec.calcul()
+                plt.plot(ligne)
+                axes = plt.gca()
+                axes.set_ylim(-5, 260)
+                plt.savefig("Graphique/ligne"+str(x)+".png")
+                plt.close()
+
         print("temps ", time.clock() - self.temps)
         #self.RemplirTableauResultats()
+
+    #Permet de supprimer tous les fichiers dans un répertoire
+    #@param repertoire : string
+    def EraseFile(self, repertoire):
+        import os
+
+        files=os.listdir(repertoire)
+        for i in range(0,len(files)):
+            os.remove(repertoire+'/'+files[i])

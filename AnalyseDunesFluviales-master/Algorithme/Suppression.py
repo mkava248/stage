@@ -1,7 +1,4 @@
 import numpy as np
-from PIL import Image
-import matplotlib.image as mpimg
-from tkinter import filedialog
 
 #Classe pour faire la suppression des berges
 class sup():
@@ -22,8 +19,6 @@ class sup():
 	def suppression(self, haut, bas, gauche, droite):
 		img = np.array(self.image)
 		i = img == 255
-
-		print("Sup begins")
 
 		i = i.tolist()
 		for y in range(self.largeur):
@@ -81,8 +76,6 @@ class sup():
 		i = np.logical_not(i)
 		img = i * img
 		img = img + berge
-		image = np.array(img)
-		mpimg.imsave("test.png", image)
 		return img.tolist()
 
 	#Supprime le même nombre de pixel sur chaque côté

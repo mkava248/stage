@@ -2,6 +2,7 @@ import numpy as np
 
 #Classe permettant de faire des opérations sur des matrices de grande taille
 class Operation():
+	#Ne fait rien
 	def __init__(self):
 		pass
 
@@ -45,7 +46,7 @@ class Operation():
 	#@param im1 : image (liste de liste)
 	#@param im2 : image (liste de liste)
 	#@return boolean
-	def egale(self, im1, im2):		
+	def egal(self, im1, im2):		
 		if(im1 == im2):
 			return True
 		return False

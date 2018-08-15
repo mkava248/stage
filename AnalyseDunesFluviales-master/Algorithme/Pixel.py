@@ -25,6 +25,9 @@ class Pixel():
 	def getLevel(self):
 		return self.level
 
+	#Surcharge de l'opérateur == 
+	#@param objet : pixel
+	#@return boolean
 	def __eq__(self, objet):
 		if(objet.getX() == self.getX() and objet.getY() == self.getY() and objet.getLevel() == self.getLevel()):
 			return True

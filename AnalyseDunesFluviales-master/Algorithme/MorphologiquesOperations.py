@@ -1,9 +1,9 @@
-from Algorithme import Operation as OP
+from Algorithme import Operation as ope
 import numpy as np
 import cv2
 
 #Classe pour faire des opérations morphologiques (erode, dilate, gradient)
-#Utilise les méthodes de la bibliothèque de numpy
+#Utilise les méthodes de la bibliothèque de numpy et cv2
 class MorphologiquesOperations():
 
 	#Initialisation où l'on va définir le masque
@@ -36,11 +36,16 @@ class MorphologiquesOperations():
 		dil = self.dilate(image)
 		ero = self.erode(image)
 
-		print("Dil and ero done")
 		i = 1
 		while i < size:
 			dil = self.dilate(dil)
 			ero = self.erode(ero)
-			print("Dil and ero done")
 			i += 1 
-		return OP.Operation().minus(dil, ero)
+		return ope.Operation().minus(dil, ero)
+
+	#Applique un filtre médian sur l'image
+	#@param image : image
+	#@return resultat : image
+	def median(self,image):
+		img = np.array(image, dtype = np.uint8)
+		return cv2.medianBlur(img, 3)

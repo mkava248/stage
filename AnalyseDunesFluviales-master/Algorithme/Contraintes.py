@@ -20,14 +20,9 @@ class Contraintes():
 		result = tmp[:]
 		masque = mop.erode(tmp)
 		tmp = OP.Operation().maximum(gim, masque)
-		print("First operation")
 
-		i = 1
-		while(not OP.Operation().egale(result, tmp)):
+		while(not OP.Operation().egal(result, tmp)):
 			result = tmp[:]
 			masque = mop.erode(tmp)
 			tmp = OP.Operation().maximum(gim, masque)
-			print("Operation in work")
-			i+=1
-		print(i)
 		return result

@@ -17,19 +17,15 @@ class ListPixel():
 	#Ajoute une liste de pixels
 	#@param pixels : image (liste de liste)
 	def addPixels(self, pixels):
-		x = 0
-		while(x < len(pixels)):
-			y = 0 
-			while(y < len(pixels[x])):
+		for x in range(len(pixels)):
+			for y in range(len(pixels[x])):
 				self.addPixel(pi.Pixel(x, y, pixels[x][y]))
-				y += 1
-			x += 1
 
 	#Permet d'afficher tous les  pixels de la liste
 	def displayList(self):
 		for pixels in self.listPixel:
 			for pixel in pixels:
-				print(pixel.getX(), pixel.getY(), pixel.getLevel())
+				print(pixel.getLevel(), pixel.getX(), pixel.getY())
 
 	#Permet de savoir le nombre de pixels qui sont à un niveau
 	#@param level : int 
@@ -62,11 +58,17 @@ class ListPixel():
 	def getNumberPixels(self):
 		return self.number
 
+	#Pour savoir si le pixel dans la liste
+	#@param pixel : pixel
+	#@return boolean
 	def isIn(self, pixel):
 		if(pixel in self.listPixel[pixel.getLevel()]):
 			return True
 		return False
 
+	#Surcharge de l'opérateur in
+	#@param objet : pixel
+	#return boolean
 	def __contains__(self, objet):
 		for pixel in self.listPixel[objet.getLevel()]:
 			if(pixel == objet):

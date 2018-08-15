@@ -89,7 +89,6 @@ class ImageCoupure(Frame):
 			xMax = 0
 			yMin = 0
 			yMax = 0
-			print("Création de l'image")
 			
 			if(y1<y2):
 				yMin = y1
@@ -114,8 +113,6 @@ class ImageCoupure(Frame):
 					xMin += 1
 				yMin += 1
 
-			print("Image faite")
-
 			ImageAEnvoyee = ImageDune.ImageDune()
 			ImageAEnvoyee.setImage(imageResultat)
 			ImageAEnvoyee.setResolution(self.resolution)
@@ -123,6 +120,7 @@ class ImageCoupure(Frame):
 			fenTraitementImage.title("Demande des données - Analyse dunes 2018")
 			CalculLPE.CalculLPE(fenTraitementImage, ImageAEnvoyee, self.miniature, self.seuilDetection, True)
 
+	#Efface tous points et traits sur l'image. 
 	def reset(self):
 		self.DessinPoint[:] = []
 		for ligne in self.LignesCanvas : 

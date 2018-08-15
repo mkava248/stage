@@ -2,6 +2,8 @@ from PIL import Image
 from os.path import isfile
 import cv2
 
+import copy
+
 class ImageDune():
     
     def __init__(self):
